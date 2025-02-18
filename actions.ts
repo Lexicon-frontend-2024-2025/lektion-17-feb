@@ -1,12 +1,17 @@
 "use server";
 
-import { APIData, BasePoke, PokeFromApi } from "./interfaces";
+import { APIData, BasePoke } from "./interfaces";
 
 // hämta från pokeapi
-const API_BASE = "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20";
+const API_BASE = "https://pokeapi.co/api/v2/pokemon";
 
-export async function fetchPokemons(): Promise<BasePoke[]> {
-    const response = await fetch(API_BASE);
+export async function fetchPokemons(searchParams: string): Promise<BasePoke[]> {
+    // göra om vår URL
+    const url = new URL(API_BASE);
+    url.search = searchParams; // sätter queryparametrar
+    console.log(url.toString());
+    
+    const response = await fetch(url.toString());
     if (!response.ok) {
         throw new Error(`Error HTTP status: ${response.status}`);
     }
