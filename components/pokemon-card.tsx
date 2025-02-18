@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 type PokemonCardProps = {
     name: string;
     url: string;
@@ -6,8 +8,8 @@ type PokemonCardProps = {
 
 export default function PokemonCard({name, url, id}: PokemonCardProps) {
   return (
-    <article>
+    <Link href={`/${id}`}>
         <h3>{name}, ID:{id}</h3>
-    </article>
+    </Link>
   )
 }

@@ -1,6 +1,6 @@
 "use server";
 
-import { APIData, BasePoke } from "./interfaces";
+import { APIData, BasePoke, IndividualBasePoke } from "./interfaces";
 
 // hämta från pokeapi
 const API_BASE = "https://pokeapi.co/api/v2/pokemon";
@@ -31,4 +31,16 @@ export async function fetchPokemons(searchParams: string): Promise<BasePoke[]> {
 
     return updatedPokes;
 
+}
+
+export async function fetchPokemon(id: string) {
+    const url = `${API_BASE}/${id}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Error HTTP status: ${response.status}`);
+    }
+    const data: IndividualBasePoke = await response.json();
+
+    return data;
 }

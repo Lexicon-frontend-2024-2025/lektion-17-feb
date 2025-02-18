@@ -1,4 +1,4 @@
-"use client"
+"use client" // om jag inte hade skrivit detta hade sidan varit som 'use server'
 import { fetchPokemons } from "@/actions";
 import PokemonCard from "@/components/pokemon-card";
 import { BasePoke } from "@/interfaces";
@@ -15,7 +15,7 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // när komponenten laddas in för första gången, skall vi fetcha pokemons
+    // när offset eller limit ändras, skall vi fetcha pokemons
     const loadData = async () => {
       try {
         const params = new URLSearchParams({offset, limit});
